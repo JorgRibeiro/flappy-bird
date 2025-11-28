@@ -27,7 +27,7 @@ bias_replace_rate       = 0.1       # Probabilidade (10%) de substituir completa
 
 # genome compatibility options 
 # Como ele irá separar os pássaros por espécie (genomas similares ficam juntos)
-compatibility_weight_coefficient    = 0.5     # Peso para diferenças nos pesos das conexões (CORRIGIDO: era "weigth")
+compatibility_weight_coefficient    = 0.5     # Peso para diferenças nos pesos das conexões
 compatibility_disjoint_coefficient  = 1.0     # Peso para conexões/nós que existem em um genoma mas não no outro
 
 # connection add/remove rates
@@ -37,8 +37,8 @@ conn_delete_prob        = 0.5       # 50% de chance de remover uma conexão exis
 
 # connection enable rates
 # Controla se as conexões estão ativas ou desativadas
-enabled_default         = True      # Todas as conexões são ativas por padrão (CORRIGIDO: era "enable_default")
-enabled_mutate_rate     = 0.01      # Mutação é baixa - 1% de chance de ativar/desativar uma conexão (CORRIGIDO: era "enable_mutate_rate")
+enabled_default         = True      # Todas as conexões são ativas por padrão
+enabled_mutate_rate     = 0.01      # Mutação é baixa - 1% de chance de ativar/desativar uma conexão 
 
 feed_forward            = True      # Alimentando a IA "para frente"
 initial_connection      = full      # inicialmente todos os inputs estarão conectados ao output

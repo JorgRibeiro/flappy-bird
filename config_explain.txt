@@ -1,14 +1,14 @@
 [NEAT]
 # Queremos MAXIMIZAR a pontuação (O pássaro que chegar mais longe)
-fitness_criterion       = max
+fitness_criterion     = max
 # Qual o limite? onde o pássaro vai parar/encerrar o jogo
-fitness_threshold       = 1000
+fitness_threshold     = 1000
 # Tamanho da população
-pop_size                = 100
+pop_size              = 100
 # Se nenhuma espécie chegar ao objetivo, em um número n de gerações, travar as gerações e dar um output error
-reset_on_extinction     = False
+reset_on_extinction   = False
 # Permite continuar o treinamento mesmo após atingir o fitness_threshold
-no_fitness_termination  = False
+no_fitness_termination = False
 
 [DefaultGenome]
 # node activation options
@@ -46,11 +46,11 @@ bias_mutate_rate        = 0.7
 # Probabilidade (10%) de substituir completamente o bias por um novo valor
 bias_replace_rate       = 0.1
 
-# genome compatibility options 
+# genome compatibility options
 # Como ele irá separar os pássaros por espécie (genomas similares ficam juntos)
 # Peso para conexões/nós que existem em um genoma mas não no outro
 compatibility_disjoint_coefficient = 1.0
-# Peso para diferenças nos pesos das conexões (CORRIGIDO: era "weigth")
+# Peso para diferenças nos pesos das conexões
 compatibility_weight_coefficient   = 0.5
 
 # connection add/remove rates
@@ -60,14 +60,14 @@ conn_add_prob           = 0.5
 # 50% de chance de remover uma conexão existente
 conn_delete_prob        = 0.5
 
-# connection enable rates
+# connection enable options
 # Controla se as conexões estão ativas ou desativadas
-# Todas as conexões são ativas por padrão (CORRIGIDO: era "enable_default")
+# Todas as conexões são ativas por padrão
 enabled_default         = True
-# Mutação é baixa - 1% de chance de ativar/desativar uma conexão (CORRIGIDO: era "enable_mutate_rate")
+# Mutação é baixa - 1% de chance de ativar/desativar uma conexão
 enabled_mutate_rate     = 0.01
 # Taxa de mutação para ativar conexões desativadas
-enabled_rate_to_true_add  = 0.0
+enabled_rate_to_true_add = 0.0
 # Taxa de mutação para desativar conexões ativas
 enabled_rate_to_false_add = 0.0
 
@@ -75,6 +75,10 @@ enabled_rate_to_false_add = 0.0
 feed_forward            = True
 # Inicialmente todos os inputs estarão conectados ao output
 initial_connection      = full
+# Se True, apenas uma mutação estrutural (adicionar/remover nó ou conexão) por vez
+single_structural_mutation = false
+# Determina o comportamento se single_structural_mutation=True ('default' é o padrão)
+structural_mutation_surer = default
 
 # node add/remove rates
 # Qual a probabilidade de adicionar/remover neurônios intermediários na rede
@@ -83,7 +87,7 @@ node_add_prob           = 0.2
 # 20% de chance de remover um neurônio existente
 node_delete_prob        = 0.2
 
-# network parameters (parametros da rede neural)
+# network parameters
 # Quantos inputs, outputs e nós intermediários o código vai começar
 # Começa sem neurônios ocultos (a rede vai evoluir e criar conforme necessário)
 num_hidden              = 0
@@ -110,11 +114,6 @@ response_mutate_power   = 0.0
 response_mutate_rate    = 0.0
 # Sem substituição de valores
 response_replace_rate   = 0.0
-
-# Se True, apenas uma mutação estrutural (adicionar/remover nó ou conexão) por vez
-single_structural_mutation = False
-# Determina o comportamento se single_structural_mutation=True ('default' é o padrão)
-structural_mutation_surer = default
 
 # connection weight options
 # Configuração dos pesos das conexões (o quanto cada conexão influencia o resultado)
@@ -143,17 +142,17 @@ compatibility_threshold = 3.0
 [DefaultStagnation]
 # Controla quando uma espécie está "estagnada" (sem melhorias)
 # Usa o melhor indivíduo para medir fitness da espécie
-species_fitness_func    = max
+species_fitness_func = max
 # Remove espécies que ficarem 20 gerações sem melhorar
-max_stagnation          = 20
+max_stagnation       = 20
 # Mantém as 2 melhores espécies mesmo se estagnadas
-species_elitism         = 2
+species_elitism      = 2
 
 [DefaultReproduction]
 # Configurações de reprodução entre gerações
 # Mantém os 2 melhores indivíduos de cada geração
-elitism                 = 2
+elitism            = 2
 # Apenas os 20% melhores de cada espécie podem se reproduzir
-survival_threshold      = 0.2
+survival_threshold = 0.2
 # Tamanho mínimo de uma espécie
-min_species_size        = 1
+min_species_size   = 1

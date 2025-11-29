@@ -5,6 +5,7 @@ import neat
 
 ai_jogando = True
 geracao = 0
+pausado = True
 
 
 TELA_LARGURA = 500
@@ -182,7 +183,7 @@ def desenhar_tela(tela, passaros, canos, chao, pontos):
     pygame.display.update()
 
 def main(genomas, config):
-    global geracao
+    global geracao, pausado
     geracao += 1
 
     if ai_jogando:
@@ -212,11 +213,19 @@ def main(genomas, config):
                 rodando = False
                 pygame.quit()
                 quit()
-            if not ai_jogando:
-                if evento.type == pygame.KEYDOWN:
-                    if evento.key == pygame.K_SPACE:
-                        for passaro in passaros:
-                            passaro.pular()
+            if evento.type == pygame.KEYDOWN:
+                # Ctrl + I para pausar/despausar
+                if evento.key == pygame.K_i and (pygame.key.get_mods() & pygame.KMOD_CTRL):
+                    pausado = not pausado
+                # Controle manual do jogo
+                if not ai_jogando and evento.key == pygame.K_SPACE:
+                    for passaro in passaros:
+                        passaro.pular()
+
+        # Se está pausado, apenas redesenha a tela e continua o loop
+        if pausado:
+            desenhar_tela(tela, passaros, canos, chao, pontos)
+            continue
 
         indice_cano = 0
         if len(passaros) > 0:

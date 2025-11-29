@@ -125,10 +125,7 @@ Este projeto é de código aberto e está disponível para fins educacionais.
 **Jorge Ribeiro**
 - GitHub: [@JorgRibeiro](https://github.com/JorgRibeiro)
 
-## 🤝 Contribuições
 
-Contribuições, issues e pedidos de features são bem-vindos!
-
----
+**Obrigado hashtag treinamentos** 
 
 ⭐ Se este projeto te ajudou, considere dar uma estrela!

@@ -1,80 +1,159 @@
-
 [NEAT]
-fitness_criterion     = max
-fitness_threshold     = 1000
-pop_size              = 100
-reset_on_extinction   = False
+# Queremos MAXIMIZAR a pontuação (O pássaro que chegar mais longe)
+fitness_criterion       = max
+# Qual o limite? onde o pássaro vai parar/encerrar o jogo
+fitness_threshold       = 1000
+# Tamanho da população
+pop_size                = 100
+# Se nenhuma espécie chegar ao objetivo, em um número n de gerações, travar as gerações e dar um output error
+reset_on_extinction     = False
+# Permite continuar o treinamento mesmo após atingir o fitness_threshold
+no_fitness_termination  = False
 
 [DefaultGenome]
 # node activation options
+# Função de ativação: tangente hiperbólica
 activation_default      = tanh
+# Sem taxa de mutação
 activation_mutate_rate  = 0.0
+# Função de ativação: tangente hiperbólica
 activation_options      = tanh
 
 # node aggregation options
+# Para agregar os caminhos, ele irá somar
 aggregation_default     = sum
+# Sem mutação, queremos apenas somar
 aggregation_mutate_rate = 0.0
+# A única opção é somar
 aggregation_options     = sum
 
 # node bias options
+# Bias é o "viés" do neurônio - um valor que desloca a função de ativação
+# Média inicial do bias (inicia em 0)
 bias_init_mean          = 0.0
+# Desvio padrão da distribuição inicial do bias
 bias_init_stdev         = 1.0
+# Tipo de distribuição para inicializar o bias (gaussian = distribuição normal)
+bias_init_type          = gaussian
+# Valor máximo que o bias pode atingir
 bias_max_value          = 30.0
+# Valor mínimo que o bias pode atingir
 bias_min_value          = -30.0
+# Intensidade da mutação do bias
 bias_mutate_power       = 0.5
+# Probabilidade (70%) de mutar o bias em cada geração
 bias_mutate_rate        = 0.7
+# Probabilidade (10%) de substituir completamente o bias por um novo valor
 bias_replace_rate       = 0.1
 
-# genome compatibility options
+# genome compatibility options 
+# Como ele irá separar os pássaros por espécie (genomas similares ficam juntos)
+# Peso para conexões/nós que existem em um genoma mas não no outro
 compatibility_disjoint_coefficient = 1.0
+# Peso para diferenças nos pesos das conexões (CORRIGIDO: era "weigth")
 compatibility_weight_coefficient   = 0.5
 
 # connection add/remove rates
+# Qual a probabilidade dele adicionar/remover uma conexão entre neurônios
+# 50% de chance de adicionar uma nova conexão
 conn_add_prob           = 0.5
+# 50% de chance de remover uma conexão existente
 conn_delete_prob        = 0.5
 
-# connection enable options
+# connection enable rates
+# Controla se as conexões estão ativas ou desativadas
+# Todas as conexões são ativas por padrão (CORRIGIDO: era "enable_default")
 enabled_default         = True
+# Mutação é baixa - 1% de chance de ativar/desativar uma conexão (CORRIGIDO: era "enable_mutate_rate")
 enabled_mutate_rate     = 0.01
+# Taxa de mutação para ativar conexões desativadas
+enabled_rate_to_true_add  = 0.0
+# Taxa de mutação para desativar conexões ativas
+enabled_rate_to_false_add = 0.0
 
+# Alimentando a IA "para frente"
 feed_forward            = True
+# Inicialmente todos os inputs estarão conectados ao output
 initial_connection      = full
 
 # node add/remove rates
+# Qual a probabilidade de adicionar/remover neurônios intermediários na rede
+# 20% de chance de adicionar um novo neurônio
 node_add_prob           = 0.2
+# 20% de chance de remover um neurônio existente
 node_delete_prob        = 0.2
 
-# network parameters
+# network parameters (parametros da rede neural)
+# Quantos inputs, outputs e nós intermediários o código vai começar
+# Começa sem neurônios ocultos (a rede vai evoluir e criar conforme necessário)
 num_hidden              = 0
+# 3 entradas: posição Y do pássaro, distância ao cano, altura do cano
 num_inputs              = 3
+# 1 saída: pular ou não pular
 num_outputs             = 1
 
 # node response options
+# Response multiplier controla a "intensidade" da resposta do neurônio
+# Valor médio inicial da resposta (multiplicador neutro)
 response_init_mean      = 1.0
+# Sem variação inicial - todos começam com 1.0
 response_init_stdev     = 0.0
+# Tipo de distribuição para inicializar a resposta
+response_init_type      = gaussian
+# Valor máximo da resposta
 response_max_value      = 30.0
+# Valor mínimo da resposta
 response_min_value      = -30.0
+# Sem mutação na intensidade da resposta
 response_mutate_power   = 0.0
+# Sem taxa de mutação
 response_mutate_rate    = 0.0
+# Sem substituição de valores
 response_replace_rate   = 0.0
 
+# Se True, apenas uma mutação estrutural (adicionar/remover nó ou conexão) por vez
+single_structural_mutation = False
+# Determina o comportamento se single_structural_mutation=True ('default' é o padrão)
+structural_mutation_surer = default
+
 # connection weight options
+# Configuração dos pesos das conexões (o quanto cada conexão influencia o resultado)
+# Média inicial dos pesos (começa neutro)
 weight_init_mean        = 0.0
+# Desvio padrão da distribuição inicial
 weight_init_stdev       = 1.0
+# Tipo de distribuição para inicializar os pesos
+weight_init_type        = gaussian
+# Peso máximo possível
 weight_max_value        = 30
+# Peso mínimo possível
 weight_min_value        = -30
+# Intensidade da mutação dos pesos
 weight_mutate_power     = 0.5
+# Alta probabilidade (80%) de mutar pesos
 weight_mutate_rate      = 0.8
+# 10% de chance de substituir completamente um peso
 weight_replace_rate     = 0.1
 
 [DefaultSpeciesSet]
+# Threshold para determinar se dois genomas pertencem à mesma espécie
+# Quanto menor, mais espécies diferentes serão criadas
 compatibility_threshold = 3.0
 
 [DefaultStagnation]
-species_fitness_func = max
-max_stagnation       = 20
-species_elitism      = 2
+# Controla quando uma espécie está "estagnada" (sem melhorias)
+# Usa o melhor indivíduo para medir fitness da espécie
+species_fitness_func    = max
+# Remove espécies que ficarem 20 gerações sem melhorar
+max_stagnation          = 20
+# Mantém as 2 melhores espécies mesmo se estagnadas
+species_elitism         = 2
 
 [DefaultReproduction]
-elitism            = 2
-survival_threshold = 0.2
+# Configurações de reprodução entre gerações
+# Mantém os 2 melhores indivíduos de cada geração
+elitism                 = 2
+# Apenas os 20% melhores de cada espécie podem se reproduzir
+survival_threshold      = 0.2
+# Tamanho mínimo de uma espécie
+min_species_size        = 1

@@ -1,90 +1,89 @@
+
 [NEAT]
-fitness_criterion       = max       # Queremos MAXIMIZAR a pontuação(O pássaro que chegar mais longe)
-fitness_threshold       = 1000      # Qual o limite? onde o pássaro vai parar/encerrar o jogo
-pop_size                = 100       # Tamanho da população 
-reset_on_extinction     = False     # Se nenhuma espécie chegar ao objetivo, em um número n de gerações, travar as gerações e dar um output error
+fitness_criterion     = max
+fitness_threshold     = 1000
+pop_size              = 100
+reset_on_extinction   = False
+no_fitness_termination = False
 
 [DefaultGenome]
 # node activation options
-activation_default      = tanh      # Função de ativição: tangente hiperbólica 
-activation_mutate_rate  = 0.0       # Sem taxa de mutação
-activation_options      = tanh      # Função de ativição: tangente hiperbólica
+activation_default      = tanh
+activation_mutate_rate  = 0.0
+activation_options      = tanh
 
 # node aggregation options
-aggregation_default     = sum       # Para agregar os caminhos, ele irá somar
-aggregation_mutate_rate = 0.0       # Sem mutação, queremos apenas somar
-aggregation_options     = sum       # A única opção é somar
+aggregation_default     = sum
+aggregation_mutate_rate = 0.0
+aggregation_options     = sum
 
 # node bias options
-# Bias é o "viés" do neurônio - um valor que desloca a função de ativação
-bias_init_mean          = 0.0       # Média inicial do bias (inicia em 0)
-bias_init_stdev         = 1.0       # Desvio padrão da distribuição inicial do bias
-bias_max_value          = 30.0      # Valor máximo que o bias pode atingir
-bias_min_value          = -30.0     # Valor mínimo que o bias pode atingir
-bias_mutate_power       = 0.5       # Intensidade da mutação do bias
-bias_mutate_rate        = 0.7       # Probabilidade (70%) de mutar o bias em cada geração
-bias_replace_rate       = 0.1       # Probabilidade (10%) de substituir completamente o bias por um novo valor
+bias_init_mean          = 0.0
+bias_init_stdev         = 1.0
+bias_init_type          = gaussian
+bias_max_value          = 30.0
+bias_min_value          = -30.0
+bias_mutate_power       = 0.5
+bias_mutate_rate        = 0.7
+bias_replace_rate       = 0.1
 
-# genome compatibility options 
-# Como ele irá separar os pássaros por espécie (genomas similares ficam juntos)
-compatibility_weight_coefficient    = 0.5     # Peso para diferenças nos pesos das conexões
-compatibility_disjoint_coefficient  = 1.0     # Peso para conexões/nós que existem em um genoma mas não no outro
+# genome compatibility options
+compatibility_disjoint_coefficient = 1.0
+compatibility_weight_coefficient   = 0.5
 
 # connection add/remove rates
-# Qual a probabilidade dele adicionar/remover uma conexão entre neurônios
-conn_add_prob           = 0.5       # 50% de chance de adicionar uma nova conexão
-conn_delete_prob        = 0.5       # 50% de chance de remover uma conexão existente
+conn_add_prob           = 0.5
+conn_delete_prob        = 0.5
 
-# connection enable rates
-# Controla se as conexões estão ativas ou desativadas
-enabled_default         = True      # Todas as conexões são ativas por padrão
-enabled_mutate_rate     = 0.01      # Mutação é baixa - 1% de chance de ativar/desativar uma conexão 
+# connection enable options
+enabled_default         = True
+enabled_mutate_rate     = 0.01
+enabled_rate_to_true_add = 0.0
+enabled_rate_to_false_add = 0.0
 
-feed_forward            = True      # Alimentando a IA "para frente"
-initial_connection      = full      # inicialmente todos os inputs estarão conectados ao output
+feed_forward            = True
+initial_connection      = full
+single_structural_mutation = false
+structural_mutation_surer = default
 
 # node add/remove rates
-# Qual a probabilidade de adicionar/remover neurônios intermediários na rede
-node_add_prob           = 0.2       # 20% de chance de adicionar um novo neurônio
-node_delete_prob        = 0.2       # 20% de chance de remover um neurônio existente
+node_add_prob           = 0.2
+node_delete_prob        = 0.2
 
-# network parameters (parametros da rede neural)
-# Quantos inputs, outputs e nós intermediários o código vai começar
-num_hidden              = 0         # Começa sem neurônios ocultos (a rede vai evoluir e criar conforme necessário)
-num_inputs              = 3         # 3 entradas: posição Y do pássaro, distância ao cano, altura do cano
-num_outputs             = 1         # 1 saída: pular ou não pular
+# network parameters
+num_hidden              = 0
+num_inputs              = 3
+num_outputs             = 1
 
 # node response options
-# Response multiplier controla a "intensidade" da resposta do neurônio
-response_init_mean      = 1.0       # Valor médio inicial da resposta (multiplicador neutro)
-response_init_stdev     = 0.0       # Sem variação inicial - todos começam com 1.0
-response_max_value      = 30.0      # Valor máximo da resposta
-response_min_value      = -30.0     # Valor mínimo da resposta
-response_mutate_power   = 0.0       # Sem mutação na intensidade da resposta
-response_mutate_rate    = 0.0       # Sem taxa de mutação
-response_replace_rate   = 0.0       # Sem substituição de valores
+response_init_mean      = 1.0
+response_init_stdev     = 0.0
+response_init_type      = gaussian
+response_max_value      = 30.0
+response_min_value      = -30.0
+response_mutate_power   = 0.0
+response_mutate_rate    = 0.0
+response_replace_rate   = 0.0
 
 # connection weight options
-# Configuração dos pesos das conexões (o quanto cada conexão influencia o resultado)
-weight_init_mean        = 0.0       # Média inicial dos pesos (começa neutro)
-weight_init_stdev       = 1.0       # Desvio padrão da distribuição inicial
-weight_max_value        = 30        # Peso máximo possível
-weight_min_value        = -30       # Peso mínimo possível
-weight_mutate_power     = 0.5       # Intensidade da mutação dos pesos
-weight_mutate_rate      = 0.8       # Alta probabilidade (80%) de mutar pesos
-weight_replace_rate     = 0.1       # 10% de chance de substituir completamente um peso
+weight_init_mean        = 0.0
+weight_init_stdev       = 1.0
+weight_init_type        = gaussian
+weight_max_value        = 30
+weight_min_value        = -30
+weight_mutate_power     = 0.5
+weight_mutate_rate      = 0.8
+weight_replace_rate     = 0.1
 
 [DefaultSpeciesSet]
-# Threshold para determinar se dois genomas pertencem à mesma espécie
-compatibility_threshold = 3.0       # Quanto menor, mais espécies diferentes serão criadas
+compatibility_threshold = 3.0
 
 [DefaultStagnation]
-# Controla quando uma espécie está "estagnada" (sem melhorias)
-species_fitness_func    = max       # Usa o melhor indivíduo para medir fitness da espécie
-max_stagnation          = 20        # Remove espécies que ficarem 20 gerações sem melhorar
-species_elitism         = 2         # Mantém as 2 melhores espécies mesmo se estagnadas
+species_fitness_func = max
+max_stagnation       = 20
+species_elitism      = 2
 
 [DefaultReproduction]
-# Configurações de reprodução entre gerações
-elitism                 = 2         # Mantém os 2 melhores indivíduos de cada geração
-survival_threshold      = 0.2       # Apenas os 20% melhores de cada espécie podem se reproduzir
+elitism            = 2
+survival_threshold = 0.2
+min_species_size   = 1

@@ -95,7 +95,7 @@ class Passaro:
 
 
 class Cano:
-    DISTANCIA = 200
+    DISTANCIA = 180
     VELOCIDADE = 5
     
     def __init__(self, x):
@@ -255,7 +255,7 @@ def main(genomas, config):
 
         if adicionar_cano:
             pontos += 1
-            canos.append(Cano(600))
+            canos.append(Cano(525))
             for genoma in lista_genomas:
                 genoma.fitness += 5
         for cano in remover_canos:
